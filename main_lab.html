@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script type="text/javascript" src="https://unpkg.com/vis-network@latest/dist/vis-network.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./style/context_menu.css">
+  <link rel="stylesheet" href="./style/main.css">
+  <link href="https://unpkg.com/vis-network@latest/dist/vis-network.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>GRAPHS</title>
+  <link rel="shortcut icon" href="./img/title_picture.jpg" type="image/x-icon">
+
+  <script src="html2canvas.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">GRAPHS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          File
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">
+            <input type="file" id="file" name="file" class="inputfile">
+            <label for="file">Open from file</label>
+          </a>
+          <div class="dropdown-item" href="#">
+            <div class="btn-group dropright">
+              <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Save as
+              </a>
+              <div class="dropdown-menu" x-placement="right-start">
+                <a class="dropdown-item" href="#" id="save_as_adj_matrix">Adjacency matrix</a>
+                <a class="dropdown-item" href="#" id="save_as_inc_matrix">Incidence matrix</a>
+                <a class="dropdown-item" href="#" id="save_as_vertices">List of vertices</a>
+                <a class="dropdown-item" href="#" id="save_as_picture">Picture</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal_About">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal_Authors">Author</a>
+      </li>
+      <li> 
+        <a class="nav-link" href="#" id="undo" onclick="undo_func()">Undo</a>
+      </li>
+      <li>
+        <a class="nav-link" href="#" id="rendo" onclick="redo_func()">Redo</a>
+      </li>  
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Algorithms
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-item" href="#">
+            <div class="btn-group dropright">
+              <a aria-expanded="false" id="lab04">
+                Radius, diameter
+              </a>
+            </div>
+          </div>
+          <div class="dropdown-item" href="#">
+            <div class="btn-group dropright">
+              <a aria-expanded="false" id="connectivity_graph">
+                The connectivity of the graph
+              </a>
+            </div>
+          </div>
+          <div class="dropdown-item" href="#">
+            <div class="btn-group dropright">
+              <a aria-expanded="false" id="add__for_graph">
+                Addition for the graph
+              </a>
+            </div>
+          </div>
+          <div class="dropdown-item" href="#">
+            <div class="btn-group dropright">
+              <a aria-expanded="false" id="lab14">
+                Chromatic number
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>             
+    </ul>
+  </div>
+</nav>
+
+<div class="modal fade" id="myModal_About" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">About</h4>
+      </div>
+      <div class="mx-auto" style="padding: 20px" class="text-justify" id="about">
+        The program is used to draw graphs and solve some problems. 
+        You can draw graphs on the adjacency matrix by adding certain values to it: 
+        <br> 
+        1) 1 or 0 for unloaded and undirected graph. For example: 
+        <br>
+        <img src="./img/about_1.png" id="about_1"> 
+        <img src="./img/about_1g.jpg" id="about_1g">
+        <br>
+        2) From 0 to 100 for loaded and undirected graph. For example: 
+        <br>
+        <img src="./img/about_2.png" id="about_2">
+        <img src="./img/about_2g.jpg" id="about_2g">
+        <br>
+        3) From 0 to 100 for loaded and directed graph. For examle:
+        <br>
+        <img src="./img/about_3.png" id="about_3">
+        <img src="./img/about_3g.jpg" id="about_3g">
+        <br>
+        4) 0 or 1 for unloaded and directed directed graph. For example:
+        <br>
+        <img src="./img/about_4.png" id="about_4">
+        <img src="./img/about_4g.jpg" id="about_4g">
+        <br>
+        5) you can draw a multigraph. For example:
+        <br>
+        <img src="./img/about_multi.png" id="about_multi">
+        <img src="./img/about_multig.jpg" id="about_multig">
+        <br>
+        You can change the location of vertices by dragging them with the mouse over the field. In the context menu for the graph, you can change the names of vertices, delete vertices, make a loop (first select the vertex). 
+        <br>
+        <img src="./img/about_context.png" id="about_context">
+        <img src="./img/about_contextg.jpg" id="about_contextg">
+        <br>
+        There is a functional for saving to a file in the form of adjacency matrices, incidence, list of vertices. You can read from a file in the formats of adjacency matrix, incident matrix, vertex list. 
+        There are functions to return up to 10 steps back and return 10 steps forward.
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal_Authors" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="mbodal-title" id="myModalLabel">Author</h4>
+      </div>
+        <div class="mx-auto" style="padding: 20px" class="text-justify" id="author">
+          Vorobyev Maxim Dmitrievich
+          <hr>
+          <div id="socials">
+            <a href="https://vk.com/maxrusmos" target="_blank"><img src="./img/vk_picture.png" alt="vk" id="vk"></a>
+            <a href="mailto:vmaxim7777@gmail.com" target="_blank"><img src="./img/email_picture.png" alt="email" id="email"></a>
+            <a href="https://github.com/Maxrusmos" target="_blank"><img src="./img/github_picture.png" alt="github" id="github"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  
+
+<div class="modal fade bd-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="small_modal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Call the top</h5>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="new_node_label" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="confirm_name" data-dismiss="modal">Сall</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="small_modal_2">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Call the top</h5>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="changed_node_label" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="confirm_changed_name" data-dismiss="modal">Сall</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="cont_field">
+  <div id="matrix_block">
+    <div class="btn-group ml-3 mt-3" class="graph_ops">
+      <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="load_unload_graph">
+      Unloaded graph
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#" id="unl_graph" onclick="load_to_unl_parse()">Unloaded graph</a>
+        <a class="dropdown-item" href="#" id="load_graph" onclick="unload_to_load_parse()">Loaded graph</a>
+      </div>
+    </div>
+
+    <div class="btn-group ml-3 mt-3" class="graph_ops">
+      <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dir_undir_graph">
+      Undirected graph
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#" id="undir_graph" onclick="dir_to_undir_parse()">Undirected graph</a>
+        <a class="dropdown-item" href="#" id="dir_graph" onclick="undir_to_dir_parse()">Directed graph</a>
+      </div>
+    </div>
+
+    <div id="checkbox_multi" class="form-check ml-3 mt-3"> 
+      <input class="form-check-input" type="checkbox" value="" id="check_multi">
+      <label class="form-check-label" for="check_multi">
+        Multigraph
+      </label>
+    </div>
+
+      <div class="tabs" id="tabs_div">
+        <div class="tab_numer" id="tab_counter">Graph</div>
+        <div class="field_for_tabs" id="tabs_content_1">       
+          <div class="adj_matrix_class">
+            <div id="matrix_label_1">ADJACENCY MATRIX</div>
+            <div class="div_for_enter">
+              <label class="label_for_size">Enter size: </label>
+              <input type="number" class="size" min="1" max = "50">
+              <button class="add_matrix_btn">Add matrix</button>
+            </div>
+            <div class="to_control_1" id='control_1'>
+              <table class="table_1"></table>
+            </div>
+          </div>
+          <hr class="hr_class">
+          <div class="inc_matrix_class"> 
+            <div id="matrix_label_2">INCIDENCE MATRIX</div>
+            <div class="to_control_2">
+              <table class="table_2"></table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <menu class="menu">
+    <li class="menu-item">
+      <button type="button" class="menu-btn" id="add_top" class="btn btn-primary" data-toggle="modal" data-target="#small_modal">
+        <span class="menu-text">Add top</span>
+      </button>
+    </li>
+    <li class="menu-separator"></li>
+    <li class="menu-item">
+      <button type="button" class="menu-btn" id="change_label" class="btn btn-primary" data-toggle="modal" data-target="#small_modal_2">
+        <span class="menu-text">Change</span>
+      </button>
+    </li>
+    <li class="menu-item">
+      <button type="button" class="menu-btn" id="loop_label">
+        <span class="menu-text">Make a loop</span>
+      </button>
+    </li>
+    <li class="menu-item">
+      <button type="button" class="menu-btn">
+        <span class="menu-text" id="delete_node">Delete</span>
+      </button>
+    </li>
+  </menu>
+
+  <div id="tips_div"></div>
+
+  <div id="field"></div> 
+</div>
+
+<script type="text/javascript" src="code.js"> </script> 
+<script type="text/javascript" src="context_menu.js"></script> 
+</body>
+</html>

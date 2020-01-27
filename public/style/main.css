@@ -1,0 +1,266 @@
+html {
+	height: 100%;
+}
+
+body{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+#field{
+    width: 50vw;
+    height: calc(100%);
+    border: 1px solid lightgray;
+    margin-left: auto;
+    margin-top: 0px;
+}
+
+#cont_field{
+	display: flex;
+	height: 913px;
+	margin-bottom: 0;
+	margin-left: auto;
+}
+
+@media (max-height: 800px){
+	#cont_field{
+		height: 100%;
+	}
+
+	#field{
+		height: 100%;
+	}
+}
+
+#matrix{
+	float: left;
+	width: 30vw;
+	margin-left: 1vw;
+}
+
+#inc_matrix{
+	clear: left;
+	float: left;
+	width: 30vw;
+	margin-left: 1vw;
+}
+
+#matrix_label_1{
+	margin: 10px 25% 2px 25%;
+  	width: 50%;
+  	text-align: center;
+}
+
+#matrix_label_2{
+	margin: 0 25% 2px 25%;
+  	width: 50%;
+  	text-align: center;
+}
+
+.matrix_item{
+	width: 2vw;
+	border: none;
+	text-align: center;
+}
+
+.matrix_item:hover{
+	background-color: silver;
+}
+
+.cols{
+	text-align: center;
+	background-color: lightgray;
+}
+
+.empty{
+	background-color: lightgray;
+}
+
+.table_1{
+	display: inline-block;
+	color: #000;
+	overflow-x: auto; 
+	overflow-y: auto;
+	width: 45vw;
+	margin-left: 14px;
+}
+
+.table_1 td{
+	border: 1px solid lightgray;
+}
+
+.table_2{
+	display: inline-block;
+	color: #000;
+	overflow-x: auto; 
+	overflow-y: auto;
+	width: 45vw;
+	margin-left: 14px;
+}
+
+.table_2 td{
+	border: 1px solid lightgray;
+	text-align: center;
+}
+
+
+.rows{
+	text-align: center;
+	background-color: lightgray;
+}
+
+.label_for_size{
+	background-color: white;
+	color: black;
+	border: none;
+	margin-left: 14px;
+}
+
+.add_matrix_btn{
+	width: 100px;
+	border: 1px solid black;
+	border-radius: 3.5px;
+	background-color: white;
+	color: gray;
+}
+
+.add_matrix_btn:hover{
+	color: white;
+	background-color: grey;
+	border: 1px solid grey;
+	cursor: pointer;
+}
+
+nav.navbar .dropright:hover > .dropdown-menu{
+	display: block; 
+	cursor: pointer;
+}
+
+nav.navbar .dropdown:hover{
+	cursor: pointer;
+}
+
+#dir_undir_graph, #load_unload_graph{
+	width: 180px;
+}
+
+.tabs{ 
+	width: 46.5vw; 
+	padding: 0px; 
+	margin: 0 auto; 
+	margin-top: 10px;
+	margin-left: 15px;
+}
+
+.tabs .tab_numer{
+    display: inline-block;
+    width: 145px;
+    padding: 6px;
+    margin: 0 -5px -1px 0;
+    text-align: center;
+    color: #666666;
+    border: 1px solid #C0C0C0;
+    background: #E0E0E0;
+}
+
+#tab_counter:hover{
+	cursor: pointer;
+}
+
+.field_for_tabs{
+	display: block;
+	border: 1px solid #C0C0C0;
+}
+
+#add_tab_btn{
+	margin-left: 0.5vw;
+	margin-bottom: 3.5px;
+	height: 38px;
+	width: 38px;
+	text-align: center;
+	background-color: white;
+	border-radius: 1px;
+}
+
+#add_tab_btn:hover{
+	color: white;
+	background-color: grey;
+	cursor: pointer;
+}
+
+#close_tab{
+	border: none;
+	border-radius: 50%;
+	color: black;
+	background-color: white;
+	margin-left: 0.5vw;
+}
+
+#close_tab:hover{
+	border: none;
+	border-radius: 50px;
+	color: white;
+	background-color: gray;
+	cursor: pointer;
+}
+
+.adj_matrix_class button{
+	cursor: pointer;
+}
+
+.adj_matrix_class input{
+	width: 46px;
+}
+
+.inputfile{
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label:hover {
+    cursor: pointer;
+}
+
+hr{
+	border: 0;
+	height: 1px;
+	background: lightgray;
+}
+
+#tips_div{
+	width: 45px;
+	text-align: center;
+	border: 1px solid lightgray;
+	opacity: 0.7;
+	border-radius: 4px 4px 4px 0;
+}
+
+#author{
+	font-size: 23px;
+}
+
+#socials{
+	display: block;
+	text-align: center;
+}
+
+#vk, #email, #github{
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+}
+
+#about{
+	font-size: 23px;
+}
+
+#about_1, #about_2, #about_3, #about_4, 
+#about_1g, #about_2g, #about_3g, #about_4g, 
+#about_context, #about_contextg, #about_multi, #about_multig{
+	width: 370px;
+}
